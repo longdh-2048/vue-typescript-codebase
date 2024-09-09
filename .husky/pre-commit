@@ -1,0 +1,38 @@
+# 🏗️ Pre-commit Hook: Building Quality Code
+echo "🔍 Running pre-commit checks..."
+
+# Define color codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# 🚦 Check for code linting issues
+echo "🔧 Running linters..."
+npm run lint
+if [ $? -ne 0 ]; then
+  echo -e "${RED}🚨 Linting errors found! Fix them before committing.${NC}"
+  exit 1
+fi
+
+# 📜 Run tests
+echo "🧪 Running tests..."
+npm test
+if [ $? -ne 0 ]; then
+  echo -e "${RED}🚨 Tests failed! Resolve issues before committing.${NC}"
+  exit 1
+fi
+
+# 📦 Format code
+echo "📝 Formatting code..."
+npm run format
+if [ $? -ne 0 ]; then
+  echo -e "${YELLOW}⚠️ Formatting issues detected! Please format your code before committing.${NC}"
+  exit 1
+fi
+
+# 🎉 All checks passed!
+echo -e "${GREEN}✅ All checks passed! Your commit is ready.${NC}"
+
+# 🎨 Add a touch of color
+echo -e "${GREEN}🎉 Happy coding! Your commit is ready to go. 🚀${NC}"
