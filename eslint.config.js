@@ -1,11 +1,15 @@
 /* eslint-env node */
+import globals from 'globals'
 import pluginVue from 'eslint-plugin-vue'
-import eslint from '@eslint/js'
+import pluginJs from '@eslint/js'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default defineConfigWithVueTs(
-  eslint.configs.recommended,
+  { ignores: ['dist'] },
+  { files: ['**/*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}'] },
+  { languageOptions: { ecmaVersion: 2020, globals: globals.browser } },
+  pluginJs.configs.recommended,
   vueTsConfigs.recommended,
   eslintPluginPrettierRecommended,
   ...pluginVue.configs['flat/essential'],
