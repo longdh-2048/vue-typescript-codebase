@@ -17,7 +17,8 @@
     "lint:fix": "eslint . --fix --ignore-pattern .gitignore",
     "format": "prettier --write src/",
     "commitlint": "commitlint --edit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "cypress install"
   },
   "dependencies": {
     "pinia": "^3.0.3",
